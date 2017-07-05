@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 # class member variables go here, for example:
 # var a = 2
@@ -20,13 +20,16 @@ var logic_cells =[ [PLAYER_NONE,PLAYER_NONE,PLAYER_NONE],
 var game_state= GAME_STATE_P1
 var check_count=0
 onready var celdas = get_node("GridContainer").get_children()
+onready var playerLabel = get_node("WhoPlaysControl/PlayerLabel")
 
 func _ready():
 	for celda in celdas:
 		celda.connect("input_event", self, "_on_TextureFrame_input_event", [celda])
+		celda.connect("mouse_enter", self, "_on_TextureFrame_mouse_enter", [celda])
+		celda.connect("mouse_exit", self, "_on_TextureFrame_mouse_exit", [celda])
+	_restart()
 	# Called every time the node is added to the scene.
 	# Initialization here
-	pass
 	
 func _on_TextureButton_button_down_1():
 	label2_state = (label2_state+1) % 2 
@@ -44,16 +47,33 @@ func _on_TextureFrame_input_event( ev , celda):
 		check_count+=1
 		logic_cells[celda.x][celda.y]= game_state
 		game_state=  (game_state+1)%2
+		_update_player_label(game_state)
 		winner= _is_there_a_game()
+		
 	if (winner != PLAYER_NONE):
-		print(winner)
-		_restart()
+		get_node("WhoPlaysControl/NowPlaysLabel").hide()
+		get_node("WhoPlaysControl/WinLabel").show()
+		get_node("WhoPlaysControl/QuitButton").show()
+		_update_player_label(winner)
 	if (check_count>=9):
 		_restart()
+		
+func _on_TextureFrame_mouse_enter(celda):
+	if (logic_cells[celda.x][celda.y] == PLAYER_NONE):
+		celda.preCheck(game_state)
+	
+func _on_TextureFrame_mouse_exit(celda):
+	if (logic_cells[celda.x][celda.y] == PLAYER_NONE):
+		celda.preCheck(null)
 	
 func _restart():
 	game_state= GAME_STATE_P1
 	check_count=0
+	playerLabel.set_text("Jugador 1")
+	playerLabel.add_color_override("font_color", Color(0.867188,0.165985,0.165985))
+	get_node("WhoPlaysControl/NowPlaysLabel").show()
+	get_node("WhoPlaysControl/WinLabel").hide()
+	get_node("WhoPlaysControl/QuitButton").hide()
 	for celda in celdas:
 		celda.check(PLAYER_NONE)
 	for x in range(3):
@@ -73,3 +93,11 @@ func _is_there_a_game():
 		if (logic_cells[2][0] == logic_cells[1][1] and logic_cells[1][1] == logic_cells[0][2]):
 			return logic_cells[1][1]
 	return PLAYER_NONE
+	
+func _update_player_label(player):
+	if (player == GAME_STATE_P1):
+		playerLabel.set_text("Jugador 1")
+		playerLabel.add_color_override("font_color", Color(0.867188,0.165985,0.165985))
+	else:
+		playerLabel.set_text("Jugador 2")
+		playerLabel.add_color_override("font_color", Color(0.270676,0.631152,0.949219))
