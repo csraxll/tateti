@@ -1,8 +1,22 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://title_menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/main_menu/back.jpg" type="Texture" id=2]
-[ext_resource path="res://assets/text/TxtPlay.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 3 )
 
 [node name="MainMenu" type="Control"]
 
@@ -22,23 +36,42 @@ texture = ExtResource( 2 )
 centered = false
 region_rect = Rect2( 0, 0, 480, 854 )
 
-[node name="PlayButton" type="TextureButton" parent="."]
+[node name="1PlayerButtonLabel" type="Label" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 106.0
+margin/top = 253.0
+margin/right = 365.0
+margin/bottom = 353.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
+text = "Player 1 vs IA"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="2PlayersButtonLabel" type="Label" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 200.0
-margin/top = 380.0
-margin/right = 306.0
-margin/bottom = 439.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-textures/normal = ExtResource( 3 )
-params/resize_mode = 0
-params/stretch_mode = 0
+margin/left = 55.0
+margin/top = 349.0
+margin/right = 426.0
+margin/bottom = 449.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
+text = "Player1 vs Player2"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
-[connection signal="input_event" from="PlayButton" to="." method="_on_PlayButton_input_event"]
+[connection signal="input_event" from="1PlayerButtonLabel" to="." method="_on_1PlayerButtonLabel_input_event"]
+
+[connection signal="input_event" from="2PlayersButtonLabel" to="." method="_on_2PlayersButtonLabel_input_event"]
 
 
