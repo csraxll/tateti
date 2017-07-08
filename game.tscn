@@ -246,7 +246,6 @@ max_lines_visible = -1
 
 [node name="WhoPlaysControl" type="Control" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -258,6 +257,7 @@ margin/bottom = 607.0
 
 [node name="WinLabel" type="Label" parent="WhoPlaysControl"]
 
+visibility/visible = false
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -269,6 +269,24 @@ margin/bottom = 63.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "Ganador"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TieLabel" type="Label" parent="WhoPlaysControl"]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = -10.0
+margin/right = 131.0
+margin/bottom = 63.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
+text = "Empate"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

@@ -17,6 +17,7 @@ var ia_cells =[ [0,0,0],
 var game_state= GAME_STATE_P1
 var game_mode = Globals.get("GAME_MODE")
 var check_count=0
+var step=0
 var wins_player1=0
 var wins_player2=0
 var textMainColor= Color(0.321259,0.394064,0.679688)
@@ -29,7 +30,7 @@ func _ready():
 		celda.connect("mouse_enter", self, "_on_TextureFrame_mouse_enter", [celda])
 		celda.connect("mouse_exit", self, "_on_TextureFrame_mouse_exit", [celda])
 	_restart()
-	print (game_mode)
+	#print (game_mode)
 	# Called every time the node is added to the scene.
 	# Initialization here
 	
@@ -44,9 +45,10 @@ func _on_TextureFrame_input_event( ev , celda):
 				game_state=  (game_state+1)%2
 				_update_player_label(game_state)
 				winner= _is_there_a_game()
-				if (winner == PLAYER_NONE):
+				if (winner == PLAYER_NONE and check_count< 9):
 		#else: #IA plays...
 					_ia()
+					check_count+=1
 					#for x in range(3):
 					#	print("%d,%d,%d" % logic_cells[x])
 					#print("------")
@@ -59,8 +61,13 @@ func _on_TextureFrame_input_event( ev , celda):
 		get_node("WhoPlaysControl/RestartButtonLabel").show()
 		game_state= GAME_STATE_FINISHED
 		_update_player_label(winner)
-	if (check_count>=9):
-		_restart()
+	if (check_count>=9 and winner == PLAYER_NONE):
+		game_state= GAME_STATE_FINISHED
+		get_node("WhoPlaysControl/TieLabel").show()
+		get_node("WhoPlaysControl/PlayerLabel").hide()
+		get_node("WhoPlaysControl/NowPlaysLabel").hide()
+		get_node("WhoPlaysControl/RestartButtonLabel").show()
+	#print(check_count)
 		
 func _on_TextureFrame_mouse_enter(celda):
 	if (logic_cells[celda.x][celda.y] == PLAYER_NONE):
@@ -73,10 +80,12 @@ func _on_TextureFrame_mouse_exit(celda):
 func _restart():
 	game_state= GAME_STATE_P1
 	check_count=0
+	step=0
 	playerLabel.set_text("Jugador 1")
 	playerLabel.add_color_override("font_color", Color(0.867188,0.165985,0.165985))
 	get_node("WhoPlaysControl/NowPlaysLabel").show()
 	get_node("WhoPlaysControl/WinLabel").hide()
+	get_node("WhoPlaysControl/TieLabel").hide()
 	get_node("WhoPlaysControl/RestartButtonLabel").hide()
 	for celda in celdas:
 		celda.check(PLAYER_NONE)
@@ -89,34 +98,44 @@ func _restart():
 #	Tener dos modos: Medio - Elige primer movimiento fuera de una esquina - Dificil - Elige primer movimiento en el medio o en una esquina
 #
 func _ia():
-	for x in range(3):
-		for y in range(3):
-			ia_cells[x][y]=0
-	for x in range(3):
-		for y in range(3):
-			if (logic_cells[x][y]==GAME_STATE_P1):
-				_ia_check_ia_cell(x+1,y)
-				_ia_check_ia_cell(x,y+1)
-				_ia_check_ia_cell(x-1,y)
-				_ia_check_ia_cell(x,y-1)
-				_ia_check_ia_cell(x+2,y)
-				_ia_check_ia_cell(x,y+2)
-				_ia_check_ia_cell(x-2,y)
-				_ia_check_ia_cell(x,y-2)
-				if (_ia_cell_middle_or_corner(x,y)):
-					_ia_check_ia_cell(x+1,y+1)
-					_ia_check_ia_cell(x-1,y+1)
-					_ia_check_ia_cell(x-1,y-1)
-					_ia_check_ia_cell(x+1,y-1)
-					_ia_check_ia_cell(x+2,y+2)
-					_ia_check_ia_cell(x-2,y+2)
-					_ia_check_ia_cell(x-2,y-2)
-					_ia_check_ia_cell(x+2,y-2)
-	_ia_possible_games()
+	if (step == 0 and logic_cells[1][1] == PLAYER_NONE):
+		logic_cells[1][1] = game_state
+		for celda in celdas:
+			if (celda.x== 1 and celda.y== 1):
+				celda.check(game_state)
+		step+=1
+	else:
+		for x in range(3):
+			for y in range(3):
+				ia_cells[x][y]=0
+		for x in range(3):
+			for y in range(3):
+				if (logic_cells[x][y]==GAME_STATE_P1):
+					_ia_check_ia_cell(x+1,y)
+					_ia_check_ia_cell(x,y+1)
+					_ia_check_ia_cell(x-1,y)
+					_ia_check_ia_cell(x,y-1)
+					if (step!=1):
+						_ia_check_ia_cell(x+2,y)
+						_ia_check_ia_cell(x,y+2)
+						_ia_check_ia_cell(x-2,y)
+						_ia_check_ia_cell(x,y-2)
+					if (_ia_cell_middle_or_corner(x,y)):
+						for i in range (2):
+							_ia_check_ia_cell(x+1,y+1)
+							_ia_check_ia_cell(x-1,y+1)
+							_ia_check_ia_cell(x-1,y-1)
+							_ia_check_ia_cell(x+1,y-1)
+							_ia_check_ia_cell(x+2,y+2)
+							_ia_check_ia_cell(x-2,y+2)
+							_ia_check_ia_cell(x-2,y-2)
+							_ia_check_ia_cell(x+2,y-2)
+		_ia_possible_games()
+		_ia_check_cell()
 	for x in range(3):
 		print("%d,%d,%d" % ia_cells[x])
 	print("------")
-	_ia_check_cell()
+	
 
 func _ia_check_ia_cell(x,y):
 	if (x>=0 and x <= 2 and y>=0 and y <= 2):
@@ -183,15 +202,6 @@ func _ia_possible_games():
 				_ia_check_ia_cell(1,1)
 		else:
 			ia_cells[1][1]-=1
-#	for i in range(3):
-#		if (logic_cells[(i+2)%3][i] != PLAYER_NONE and logic_cells[(i+1)%3][(i+1)%3] != PLAYER_NONE):
-#			if (logic_cells[(i+2)%3][i] == logic_cells[(i+1)%3][(i+1)%3]):
-#				_ia_check_ia_cell(i,(i+2)%3)
-#				if (logic_cells[(i+2)%3][i] == PLAYER_2):
-#					_ia_check_ia_cell(i,(i+2)%3)
-#			else:
-#				ia_cells[i][(i+2)%3]-=1
-#				break
 
 func _ia_check_cell():
 	var best_options = []
