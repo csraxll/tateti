@@ -17,7 +17,6 @@ var ia_cells =[ [0,0,0],
 var game_state= GAME_STATE_P1
 var game_mode = Globals.get("GAME_MODE")
 var check_count=0
-var step=0
 var wins_player1=0
 var wins_player2=0
 var textMainColor= Color(0.321259,0.394064,0.679688)
@@ -83,7 +82,6 @@ func _on_TextureFrame_mouse_exit(celda):
 func _restart():
 	game_state= GAME_STATE_P1
 	check_count=0
-	step=0
 	playerLabel.set_text("Jugador 1")
 	playerLabel.add_color_override("font_color", Color(0.867188,0.165985,0.165985))
 	get_node("WhoPlaysControl/NowPlaysLabel").show()
@@ -101,22 +99,21 @@ func _ia():
 	var max_value= -9999
 	var x_selected=1
 	var y_selected=1
-	var value
+	var value= -9999
 	for x in range(3):
 		for y in range(3):
-			if (_ia_is_cell_empty(x,y)):
-				_ia_check_ia_cell(x,y,PLAYER_2)
+			if (logic_cells[x][y] == PLAYER_NONE):
+				logic_cells[x][y] = PLAYER_2
 				value= _ia_minimize_game()
-				if (value >= max_value):
+				if (value > max_value):
 					max_value = value
 					x_selected= x
 					y_selected= y
-				_ia_check_ia_cell(x,y,PLAYER_NONE)
-	_ia_check_cell(x_selected,y_selected)
-	#print("x_selected %d, y_selected %d" % [x_selected,y_selected])
-#	for x in range(3):
-#		print("%d,%d,%d" % logic_cells[x])
-#	print("------")
+				logic_cells[x][y] = PLAYER_NONE
+	logic_cells[x_selected][y_selected] = PLAYER_2
+	for celda in celdas:
+		if (celda.x== x_selected and celda.y== y_selected):
+			celda.check(PLAYER_2)
 
 func _ia_minimize_game():
 	if (_is_there_a_game(PLAYER_2)):
@@ -124,34 +121,34 @@ func _ia_minimize_game():
 	if (_ia_are_all_cells_checked()):
 		return 0
 	var min_value= 9999
-	var value
+	var value= 9999
 	for x in range(3):
 		for y in range(3):
-			if (_ia_is_cell_empty(x,y)):
-				_ia_check_ia_cell(x,y,PLAYER_1)
+			if (logic_cells[x][y] == PLAYER_NONE):
+				logic_cells[x][y] = PLAYER_1
 				value = _ia_maximize_game()
 				if (value < min_value):
 					min_value = value
-				_ia_check_ia_cell(x,y,PLAYER_NONE)
-	return value
+				logic_cells[x][y] = PLAYER_NONE
+	return min_value
 		
 		
 func _ia_maximize_game():
 	if (_is_there_a_game(PLAYER_1)):
-		return -1
+		return (-1)
 	if (_ia_are_all_cells_checked()):
 		return 0
-	var max_value= -9999
-	var value
+	var max_value= (-9999)
+	var value = (-9999)
 	for x in range(3):
 		for y in range(3):
-			if (_ia_is_cell_empty(x,y)):
-				_ia_check_ia_cell(x,y,PLAYER_2)
+			if (logic_cells[x][y] == PLAYER_NONE):
+				logic_cells[x][y] = PLAYER_2
 				value = _ia_minimize_game()
 				if (value > max_value):
 					max_value = value
-				_ia_check_ia_cell(x,y,PLAYER_NONE)
-	return value
+				logic_cells[x][y] = PLAYER_NONE
+	return max_value
 
 func _ia_are_all_cells_checked():
 	for x in range(3):
