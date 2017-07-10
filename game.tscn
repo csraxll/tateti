@@ -367,6 +367,13 @@ lines_skipped = 0
 max_lines_visible = -1
 script/script = ExtResource( 8 )
 
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = false
+
 [connection signal="input_event" from="WhoPlaysControl/RestartButtonLabel" to="." method="_on_RestartButtonLabel_input_event"]
 
 [connection signal="input_event" from="BackButtonLabel" to="." method="_on_BackButtonLabel_input_event"]
