@@ -53,7 +53,7 @@ font/font = ExtResource( 5 )
 
 [node name="Control" type="Control"]
 
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
@@ -246,6 +246,7 @@ max_lines_visible = -1
 
 [node name="WhoPlaysControl" type="Control" parent="."]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2

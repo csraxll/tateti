@@ -38,21 +38,19 @@ func _ready():
 	# Initialization here
 	
 func _on_TextureFrame_input_event( ev , celda):
-	var j
-	if (game_state == GAME_STATE_P1 or game_state == GAME_STATE_P2):
-		if (ev.type==InputEvent.MOUSE_BUTTON and ev.pressed and logic_cells[celda.x][celda.y] == PLAYER_NONE):
+	if (ev.type==InputEvent.MOUSE_BUTTON and ev.is_pressed() and logic_cells[celda.x][celda.y] == PLAYER_NONE):
+		if (game_mode == GAME_MODE_2PLAYER or (game_mode==GAME_MODE_1PLAYER and game_state==GAME_STATE_P1)):
 			logic_cells[celda.x][celda.y]= game_state
 			celda.check(game_state)
 			check_count+=1
-			print("hola")
 			if (_is_there_a_game(game_state) or check_count == 9):
 				game_state= GAME_STATE_FINISHED
 			else:
 				game_state= (game_state+1)%2
 				_update_player_label(game_state)
 		if (game_mode == GAME_MODE_1PLAYER):
+			print("%d" % ev.ID)
 			if (game_state == GAME_STATE_P2):
-				print("chau")
 				get_node("Timer").start()
 				yield(get_node("Timer"), "timeout")
 				_ia()
@@ -62,7 +60,6 @@ func _on_TextureFrame_input_event( ev , celda):
 				else:
 					game_state= GAME_STATE_P1
 					_update_player_label(game_state)
-					yield(playerLabel, "draw")
 		if (game_state== GAME_STATE_FINISHED):
 			nowPlaysLabel.hide()
 			restartButtonLabel.show()
