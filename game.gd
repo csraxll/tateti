@@ -22,7 +22,11 @@ var wins_player2=0
 var textMainColor= Color(0.321259,0.394064,0.679688)
 onready var celdas = get_node("GridContainer").get_children()
 onready var playerLabel = get_node("WhoPlaysControl/PlayerLabel")
-
+onready var nowPlaysLabel = get_node("WhoPlaysControl/NowPlaysLabel")
+onready var winLabel =get_node("WhoPlaysControl/WinLabel")
+onready var tieLabel = get_node("WhoPlaysControl/TieLabel")
+onready var restartButtonLabel = get_node("WhoPlaysControl/RestartButtonLabel")
+						
 func _ready():
 	for celda in celdas:
 		celda.connect("input_event", self, "_on_TextureFrame_input_event", [celda])
@@ -35,39 +39,41 @@ func _ready():
 	
 func _on_TextureFrame_input_event( ev , celda):
 	var j
-	if (game_mode == GAME_MODE_1PLAYER):
-		if (game_state == GAME_STATE_P1):
-			if (ev.type==InputEvent.MOUSE_BUTTON and ev.pressed and logic_cells[celda.x][celda.y] == PLAYER_NONE):
-				logic_cells[celda.x][celda.y]= game_state
-				celda.check(game_state)
+	if (game_state == GAME_STATE_P1 or game_state == GAME_STATE_P2):
+		if (ev.type==InputEvent.MOUSE_BUTTON and ev.pressed and logic_cells[celda.x][celda.y] == PLAYER_NONE):
+			logic_cells[celda.x][celda.y]= game_state
+			celda.check(game_state)
+			check_count+=1
+			print("hola")
+			if (_is_there_a_game(game_state) or check_count == 9):
+				game_state= GAME_STATE_FINISHED
+			else:
+				game_state= (game_state+1)%2
+				_update_player_label(game_state)
+		if (game_mode == GAME_MODE_1PLAYER):
+			if (game_state == GAME_STATE_P2):
+				print("chau")
+				get_node("Timer").start()
+				yield(get_node("Timer"), "timeout")
+				_ia()
 				check_count+=1
-				if (_is_there_a_game(PLAYER_1) or check_count == 9):
+				if (_is_there_a_game(PLAYER_2) or check_count == 9):
 					game_state= GAME_STATE_FINISHED
 				else:
-					game_state= GAME_STATE_P2
+					game_state= GAME_STATE_P1
 					_update_player_label(game_state)
-				if (game_state == GAME_STATE_P2):
-					get_node("Timer").start()
-					yield(get_node("Timer"), "timeout")
-					_ia()
-					check_count+=1
-					if (_is_there_a_game(PLAYER_2) or check_count == 9):
-						game_state= GAME_STATE_FINISHED
-					else:
-						game_state= GAME_STATE_P1
-						_update_player_label(game_state)
-						yield(playerLabel, "draw")
-				if (game_state== GAME_STATE_FINISHED):
-					get_node("WhoPlaysControl/NowPlaysLabel").hide()
-					get_node("WhoPlaysControl/RestartButtonLabel").show()
-					if (_is_there_a_game(PLAYER_1) or _is_there_a_game(PLAYER_2)):
-						get_node("WhoPlaysControl/WinLabel").show()
-						get_node("WhoPlaysControl/TieLabel").hide()
-					else:
-						_update_player_label(game_state)
-						#yield(playerLabel, "draw")
-						get_node("WhoPlaysControl/WinLabel").hide()
-						get_node("WhoPlaysControl/TieLabel").show()
+					yield(playerLabel, "draw")
+		if (game_state== GAME_STATE_FINISHED):
+			nowPlaysLabel.hide()
+			restartButtonLabel.show()
+			if (_is_there_a_game(PLAYER_1) or _is_there_a_game(PLAYER_2)):
+				winLabel.show()
+				tieLabel.hide()
+			else:
+				_update_player_label(game_state)
+				#yield(playerLabel, "draw")
+				winLabel.hide()
+				tieLabel.show()
 				
 	#print(check_count)
 		
@@ -84,11 +90,11 @@ func _restart():
 	check_count=0
 	playerLabel.set_text("Jugador 1")
 	playerLabel.add_color_override("font_color", Color(0.867188,0.165985,0.165985))
-	get_node("WhoPlaysControl/NowPlaysLabel").show()
-	get_node("WhoPlaysControl/WinLabel").hide()
-	get_node("WhoPlaysControl/TieLabel").hide()
-	get_node("WhoPlaysControl/RestartButtonLabel").hide()
-	get_node("WhoPlaysControl/PlayerLabel").show()
+	nowPlaysLabel.show()
+	winLabel.hide()
+	tieLabel.hide()
+	restartButtonLabel.hide()
+	playerLabel.show()
 	for celda in celdas:
 		celda.check(PLAYER_NONE)
 	for x in range(3):
