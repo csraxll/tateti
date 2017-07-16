@@ -49,7 +49,6 @@ func _on_TextureFrame_input_event( ev , celda):
 				game_state= (game_state+1)%2
 				_update_player_label(game_state)
 		if (game_mode == GAME_MODE_1PLAYER):
-			print("%d" % ev.ID)
 			if (game_state == GAME_STATE_P2):
 				get_node("Timer").start()
 				yield(get_node("Timer"), "timeout")
@@ -68,11 +67,8 @@ func _on_TextureFrame_input_event( ev , celda):
 				tieLabel.hide()
 			else:
 				_update_player_label(game_state)
-				#yield(playerLabel, "draw")
 				winLabel.hide()
 				tieLabel.show()
-				
-	#print(check_count)
 		
 func _on_TextureFrame_mouse_enter(celda):
 	if (logic_cells[celda.x][celda.y] == PLAYER_NONE):
@@ -117,7 +113,7 @@ func _ia():
 	for celda in celdas:
 		if (celda.x== x_selected and celda.y== y_selected):
 			celda.check(PLAYER_2)
-
+			
 func _ia_minimize_game():
 	if (_is_there_a_game(PLAYER_2)):
 		return 1
@@ -134,7 +130,6 @@ func _ia_minimize_game():
 					min_value = value
 				logic_cells[x][y] = PLAYER_NONE
 	return min_value
-		
 		
 func _ia_maximize_game():
 	if (_is_there_a_game(PLAYER_1)):

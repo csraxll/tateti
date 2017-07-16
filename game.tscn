@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/main_menu/back.jpg" type="Texture" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://cell.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://restart_button.gd" type="Script" id=7]
-[ext_resource path="res://back_button.gd" type="Script" id=8]
+[ext_resource path="res://button.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -246,7 +245,6 @@ max_lines_visible = -1
 
 [node name="WhoPlaysControl" type="Control" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -366,7 +364,7 @@ text = "<- Volver"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 8 )
+script/script = ExtResource( 7 )
 
 [node name="Timer" type="Timer" parent="."]
 
