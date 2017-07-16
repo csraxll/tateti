@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/main_menu/back.jpg" type="Texture" id=2]
@@ -50,6 +50,41 @@ font/use_mipmaps = false
 font/use_filter = true
 font/font = ExtResource( 5 )
 
+[sub_resource type="DynamicFont" id=7]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=9]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=10]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=11]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 5 )
+
 [node name="Control" type="Control"]
 
 focus/ignore_mouse = true
@@ -61,11 +96,17 @@ margin/top = 0.0
 margin/right = 482.0
 margin/bottom = 854.0
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Background" type="Sprite" parent="."]
 
 transform/pos = Vector2( 238, 427 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="GridContainer" type="GridContainer" parent="."]
 
@@ -75,9 +116,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 149.0
-margin/top = 253.0
+margin/top = 185.0
 margin/right = 337.0
-margin/bottom = 441.0
+margin/bottom = 373.0
 columns = 3
 
 [node name="TextureFrame" type="TextureFrame" parent="GridContainer"]
@@ -231,9 +272,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 141.0
-margin/top = 116.0
+margin/top = 48.0
 margin/right = 343.0
-margin/bottom = 216.0
+margin/bottom = 148.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.321259, 0.394064, 0.679688, 1 )
 text = "TA-TE-TI"
@@ -245,14 +286,15 @@ max_lines_visible = -1
 
 [node name="WhoPlaysControl" type="Control" parent="."]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 150.0
-margin/top = 500.0
+margin/top = 374.0
 margin/right = 340.0
-margin/bottom = 607.0
+margin/bottom = 481.0
 
 [node name="WinLabel" type="Label" parent="WhoPlaysControl"]
 
@@ -373,8 +415,124 @@ wait_time = 0.1
 one_shot = false
 autostart = false
 
+[node name="StatsControl" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -2.0
+margin/top = 704.0
+margin/right = 478.0
+margin/bottom = 816.0
+
+[node name="WinsPlayer1Label" type="Label" parent="StatsControl"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 70.0
+margin/top = -120.0
+margin/right = 188.0
+margin/bottom = -66.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.867188, 0.14566, 0.14566, 1 )
+text = "Jugador 1"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinsPlayer2Label" type="Label" parent="StatsControl"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 300.0
+margin/top = -120.0
+margin/right = 418.0
+margin/bottom = -70.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0.270676, 0.631152, 0.949219, 1 )
+text = "Jugador 2"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinsPlayer1" type="Label" parent="StatsControl"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 160.0
+margin/top = -70.0
+margin/right = 200.0
+margin/bottom = -20.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.867188, 0.14566, 0.14566, 1 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinsPlayer2" type="Label" parent="StatsControl"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 310.0
+margin/top = -70.0
+margin/right = 326.0
+margin/bottom = -20.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.270676, 0.631152, 0.949219, 1 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Ties" type="Label" parent="StatsControl"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 240.0
+margin/top = -70.0
+margin/right = 270.0
+margin/bottom = -20.0
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0.621094, 0.59, 0.59198, 1 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ResetStatsLabel" type="Label" parent="StatsControl"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 208.0
+margin/top = -33.0
+margin/right = 282.0
+margin/bottom = 17.0
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
+text = "Borrar"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 7 )
+
 [connection signal="input_event" from="WhoPlaysControl/RestartButtonLabel" to="." method="_on_RestartButtonLabel_input_event"]
 
 [connection signal="input_event" from="BackButtonLabel" to="." method="_on_BackButtonLabel_input_event"]
+
+[connection signal="input_event" from="StatsControl/ResetStatsLabel" to="." method="_on_ResetStatsLabel_input_event"]
 
 
