@@ -215,7 +215,6 @@ func _on_ResetStatsLabel_input_event( ev ):
 		_update_players_wins()
 		_store_stats()
 
-
 func _on_TextureFrame_mouse_enter(celda):
 	if (logic_cells[celda.x][celda.y] == PLAYER_NONE):
 		celda.preCheck(game_state)

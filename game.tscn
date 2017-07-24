@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
-[ext_resource path="res://assets/main_menu/back.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/main_menu/back-2-01.png" type="Texture" id=2]
 [ext_resource path="res://assets/buttons/button_blank.png" type="Texture" id=3]
 [ext_resource path="res://cell.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=5]
