@@ -1,89 +1,108 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=30 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/main_menu/back-2-01.png" type="Texture" id=2]
 [ext_resource path="res://assets/buttons/button_blank.png" type="Texture" id=3]
 [ext_resource path="res://cell.gd" type="Script" id=4]
-[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://button.gd" type="Script" id=7]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_00.tex" type="Texture" id=5]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_01.tex" type="Texture" id=6]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_02.tex" type="Texture" id=7]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_03.tex" type="Texture" id=8]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_04.tex" type="Texture" id=9]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_05.tex" type="Texture" id=10]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_06.tex" type="Texture" id=11]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_07.tex" type="Texture" id=12]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_08.tex" type="Texture" id=13]
+[ext_resource path="res://assets/buttons/frames/imported_frames/cross_09.tex" type="Texture" id=14]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://button.gd" type="Script" id=17]
+
+[sub_resource type="SpriteFrames" id=12]
+
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "cross_mark",
+"speed": 5.0
+} ]
 
 [sub_resource type="DynamicFont" id=1]
 
 font/size = 100
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=2]
 
 font/size = 73
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=3]
 
 font/size = 54
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=4]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=5]
 
 font/size = 100
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 6 )
+font/font = ExtResource( 16 )
 
 [sub_resource type="DynamicFont" id=6]
 
 font/size = 54
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=7]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=8]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=9]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=10]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=11]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 5 )
+font/font = ExtResource( 15 )
 
 [node name="Control" type="Control"]
 
@@ -96,29 +115,37 @@ margin/top = 0.0
 margin/right = 482.0
 margin/bottom = 854.0
 script/script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Background" type="Sprite" parent="."]
+[node name="Background" type="TextureFrame" parent="."]
 
-transform/pos = Vector2( 238, 427 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="GridContainer" type="GridContainer" parent="."]
-
-editor/display_folded = true
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 149.0
-margin/top = 185.0
-margin/right = 337.0
-margin/bottom = 373.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 91.0
+margin/top = 242.0
+margin/right = -97.0
+margin/bottom = 54.0
 columns = 3
 
 [node name="TextureFrame" type="TextureFrame" parent="GridContainer"]
@@ -265,16 +292,35 @@ script/script = ExtResource( 4 )
 x = 2
 y = 2
 
+[node name="Control" type="Control" parent="GridContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 192.0
+margin/right = 60.0
+margin/bottom = 192.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="GridContainer/Control"]
+
+frames = SubResource( 12 )
+animation = "cross_mark"
+centered = false
+
 [node name="TitleLabel" type="Label" parent="."]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 141.0
 margin/top = 48.0
-margin/right = 343.0
-margin/bottom = 148.0
+margin/right = 137.0
+margin/bottom = 706.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.321259, 0.394064, 0.679688, 1 )
 text = "TA-TE-TI"
@@ -287,14 +333,18 @@ max_lines_visible = -1
 [node name="WhoPlaysControl" type="Control" parent="."]
 
 editor/display_folded = true
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 150.0
-margin/top = 374.0
-margin/right = 340.0
-margin/bottom = 481.0
+margin/left = 90.0
+margin/top = 53.0
+margin/right = -100.0
+margin/bottom = -54.0
 
 [node name="WinLabel" type="Label" parent="WhoPlaysControl"]
 
@@ -351,18 +401,16 @@ max_lines_visible = -1
 
 [node name="PlayerLabel" type="Label" parent="WhoPlaysControl"]
 
-anchor/left = 1
-anchor/top = 1
-anchor/right = 1
-anchor/bottom = 1
+anchor/left = 3
+anchor/right = 3
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 118.0
-margin/top = 50.0
-margin/right = 0.0
-margin/bottom = 0.0
+margin/left = 23.0
+margin/top = 57.0
+margin/right = -95.0
+margin/bottom = 107.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.867188, 0.14566, 0.14566, 1 )
 text = "Jugador   1"
@@ -374,13 +422,15 @@ max_lines_visible = -1
 
 [node name="RestartButtonLabel" type="Label" parent="WhoPlaysControl"]
 
+anchor/left = 3
+anchor/right = 3
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 59.0
+margin/left = 36.0
 margin/top = 110.0
-margin/right = 128.0
+margin/right = -33.0
 margin/bottom = 210.0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
@@ -388,17 +438,19 @@ text = "46"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 7 )
+script/script = ExtResource( 17 )
 
 [node name="BackButtonLabel" type="Label" parent="."]
 
+anchor/left = 1
+anchor/right = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 338.0
+margin/left = 142.0
 margin/top = 20.0
-margin/right = 448.0
+margin/right = 32.0
 margin/bottom = 74.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
@@ -406,7 +458,7 @@ text = "<- Volver"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 7 )
+script/script = ExtResource( 17 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -417,14 +469,19 @@ autostart = false
 
 [node name="StatsControl" type="Control" parent="."]
 
+editor/display_folded = true
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = -2.0
-margin/top = 704.0
-margin/right = 478.0
-margin/bottom = 816.0
+margin/left = 242.5
+margin/top = -277.0
+margin/right = -237.5
+margin/bottom = -389.0
 
 [node name="WinsPlayer1Label" type="Label" parent="StatsControl"]
 
@@ -527,7 +584,7 @@ text = "Borrar"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 7 )
+script/script = ExtResource( 17 )
 
 [connection signal="input_event" from="WhoPlaysControl/RestartButtonLabel" to="." method="_on_RestartButtonLabel_input_event"]
 
