@@ -3,7 +3,7 @@ extends Control
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-enum {GAME_STATE_P1, GAME_STATE_P2, GAME_STATE_FINISHED}
+enum {GAME_STATE_P1, GAME_STATE_P2, GAME_STATE_FINISHED, GAME_STATE_WAIT_RESTART}
 enum {GAME_MODE_1PLAYER, GAME_MODE_2PLAYER}
 enum {PLAYER_1, PLAYER_2, PLAYER_NONE}
 
@@ -14,9 +14,10 @@ var logic_cells =[ [PLAYER_NONE,PLAYER_NONE,PLAYER_NONE],
 var game_state
 var game_mode
 var check_count
+var checked
 var wins_player1=0
 var wins_player2=0
-var ties=0
+var ties_players=0
 
 onready var celdas = get_node("GridContainer").get_children()
 onready var playerLabel = get_node("WhoPlaysControl/PlayerLabel")
@@ -40,55 +41,78 @@ func _ready():
 #	wins_player1=0
 #	wins_player2=0
 	_restart()
+	set_process(true)
 	#print (game_mode)
 	# Called every time the node is added to the scene.
 	# Initialization here
 	
+	
+func _process(delta):
+	if (game_state == GAME_STATE_P1):
+		if (checked):
+			if (_is_there_a_game(GAME_STATE_P1) or check_count >= 9):
+				_go_to_state(GAME_STATE_FINISHED)
+			else:
+				_go_to_state(GAME_STATE_P2)
+	elif (game_state == GAME_STATE_P2):
+		if (game_mode == GAME_MODE_2PLAYER):
+			if (checked):
+				if (_is_there_a_game(GAME_STATE_P2) or check_count >= 9):
+					_go_to_state(GAME_STATE_FINISHED)
+				else:
+					_go_to_state(GAME_STATE_P1)
+		else:
+			#get_node("Timer").start()
+			#yield(get_node("Timer"), "timeout")
+			_ia()
+			check_count += 1
+			if (_is_there_a_game(GAME_STATE_P2) or check_count >= 9):
+				_go_to_state(GAME_STATE_FINISHED)
+			else:
+				_go_to_state(GAME_STATE_P1)
+	elif (game_state == GAME_STATE_FINISHED):
+		if (_is_there_a_game(GAME_STATE_P1)):
+			wins_player1 +=1
+			winLabel.show()
+			tieLabel.hide()
+		elif (_is_there_a_game(GAME_STATE_P2)):
+			wins_player2 +=1
+			winLabel.show()
+			tieLabel.hide()
+		else:
+			_update_player_label(game_state)
+			ties_players+=1
+			winLabel.hide()
+			tieLabel.show()
+		_go_to_state(GAME_STATE_WAIT_RESTART)
+	elif (game_state == GAME_STATE_WAIT_RESTART):
+		pass
+
+func _go_to_state(new_state):
+	if (new_state == GAME_STATE_P1):
+		_update_player_label(GAME_STATE_P1)
+	elif (new_state == GAME_STATE_P2):
+		_update_player_label(GAME_STATE_P2)
+	elif (new_state == GAME_STATE_FINISHED):
+		nowPlaysLabel.hide()
+		restartButtonLabel.show()
+	elif (new_state == GAME_STATE_WAIT_RESTART):
+		_update_players_wins()
+	checked = false
+	game_state= new_state
+
 func _on_TextureFrame_input_event( ev , celda):
 	if (ev.type==InputEvent.MOUSE_BUTTON and ev.is_pressed() and logic_cells[celda.x][celda.y] == PLAYER_NONE):
-		if (game_mode == GAME_MODE_2PLAYER or (game_mode==GAME_MODE_1PLAYER and game_state==GAME_STATE_P1)):
-			logic_cells[celda.x][celda.y]= game_state
-			celda.check(game_state)
-			check_count+=1
-			if (_is_there_a_game(game_state) or check_count == 9):
-				game_state= GAME_STATE_FINISHED
-			else:
-				game_state= (game_state+1)%2
-				_update_player_label(game_state)
-		if (game_mode == GAME_MODE_1PLAYER):
-			if (game_state == GAME_STATE_P2):
-				get_node("Timer").start()
-				yield(get_node("Timer"), "timeout")
-				call_deferred("_ia")
-				#_ia()
-				check_count+=1
-				if (_is_there_a_game(PLAYER_2) or check_count == 9):
-					game_state= GAME_STATE_FINISHED
-				else:
-					game_state= GAME_STATE_P1
-					_update_player_label(game_state)
-		if (game_state== GAME_STATE_FINISHED):
-			nowPlaysLabel.hide()
-			restartButtonLabel.show()
-			if (_is_there_a_game(PLAYER_1)):
-				wins_player1 +=1
-				winLabel.show()
-				tieLabel.hide()
-			elif (_is_there_a_game(PLAYER_2)):
-				wins_player2 +=1
-				winLabel.show()
-				tieLabel.hide()
-			else:
-				_update_player_label(game_state)
-				ties+=1
-				winLabel.hide()
-				tieLabel.show()
-			_update_players_wins()
+		checked =true
+		check_count += 1
+		logic_cells[celda.x][celda.y]= game_state
+		celda.check(game_state)
 	
 func _restart():
 	game_state= GAME_STATE_P1
 	game_mode = Globals.get("GAME_MODE")
 	check_count=0
+	checked = false
 	
 	_update_players_wins()
 	playerLabel.set_text("Jugador 1")
@@ -198,7 +222,7 @@ func _update_player_label(player):
 func _update_players_wins():
 	winsPlayer1.set_text(str(wins_player1))
 	winsPlayer2.set_text(str(wins_player2))
-	tiedGames.set_text(str(ties))
+	tiedGames.set_text(str(ties_players))
 
 func _on_RestartButtonLabel_input_event( ev ):
 	if (ev.type==InputEvent.MOUSE_BUTTON and ev.pressed):
@@ -213,6 +237,7 @@ func _on_ResetStatsLabel_input_event( ev ):
 	if (ev.type==InputEvent.MOUSE_BUTTON and ev.pressed):
 		wins_player1=0
 		wins_player2=0
+		ties_players=0
 		_update_players_wins()
 		_store_stats()
 
@@ -223,8 +248,6 @@ func _on_TextureFrame_mouse_enter(celda):
 func _on_TextureFrame_mouse_exit(celda):
 	if (logic_cells[celda.x][celda.y] == PLAYER_NONE):
 		celda.preCheck(null)
-
-
 
 func _load_stats():
 	wins_player1=0
@@ -238,12 +261,12 @@ func _load_stats():
 			if (line.game_mode == Globals.get("GAME_MODE")):        
 				wins_player1= line.p1wins
 				wins_player2= line.p2wins
+				ties_players= line.ties
 				break
 		savegame.close()
 	
-
 func _store_stats():
-	var stats = {game_mode = game_mode, p1wins= wins_player1, p2wins= wins_player2, ties= ties}
+	var stats = {game_mode = game_mode, p1wins= wins_player1, p2wins= wins_player2, ties= ties_players}
 	var savegame = File.new()
 	if (savegame.file_exists("user://stats.bin")):
 		savegame.open("user://stats.bin", File.READ_WRITE)

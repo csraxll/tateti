@@ -11,12 +11,15 @@ export var y=0
 onready var sprite = get_node("AnimatedSprite")
 
 func _ready():
+	#sprite.hide()
 	sprite.set_animation("empty_mark")
 	
 func check(player):
 	if (player==PLAYER_1):
+	#	sprite.show()
 		sprite.set_animation("cross_mark")
 	elif (player==PLAYER_2):
+	#	sprite.show()
 		sprite.set_animation("circle_mark")
 	else:
 		sprite.set_animation("empty_mark")
