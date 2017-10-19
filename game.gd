@@ -59,7 +59,8 @@ func _on_TextureFrame_input_event( ev , celda):
 			if (game_state == GAME_STATE_P2):
 				get_node("Timer").start()
 				yield(get_node("Timer"), "timeout")
-				_ia()
+				call_deferred("_ia")
+				#_ia()
 				check_count+=1
 				if (_is_there_a_game(PLAYER_2) or check_count == 9):
 					game_state= GAME_STATE_FINISHED

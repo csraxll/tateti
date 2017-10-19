@@ -1,108 +1,88 @@
-[gd_scene load_steps=30 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/main_menu/back-2-01.png" type="Texture" id=2]
-[ext_resource path="res://assets/buttons/button_blank.png" type="Texture" id=3]
-[ext_resource path="res://cell.gd" type="Script" id=4]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_00.tex" type="Texture" id=5]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_01.tex" type="Texture" id=6]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_02.tex" type="Texture" id=7]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_03.tex" type="Texture" id=8]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_04.tex" type="Texture" id=9]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_05.tex" type="Texture" id=10]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_06.tex" type="Texture" id=11]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_07.tex" type="Texture" id=12]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_08.tex" type="Texture" id=13]
-[ext_resource path="res://assets/buttons/frames/imported_frames/cross_09.tex" type="Texture" id=14]
-[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=15]
-[ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=16]
-[ext_resource path="res://button.gd" type="Script" id=17]
-
-[sub_resource type="SpriteFrames" id=12]
-
-animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "cross_mark",
-"speed": 5.0
-} ]
+[ext_resource path="res://cell.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://button.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 
 font/size = 100
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 
 font/size = 73
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
 
 font/size = 54
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=4]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
 
 font/size = 100
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 16 )
+font/font = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=6]
 
 font/size = 54
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=7]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=8]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=9]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=10]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=11]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 15 )
+font/font = ExtResource( 4 )
 
 [node name="Control" type="Control"]
 
@@ -148,166 +128,77 @@ margin/right = -97.0
 margin/bottom = 54.0
 columns = 3
 
-[node name="TextureFrame" type="TextureFrame" parent="GridContainer"]
+[node name="Control" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
+rect/min_size = Vector2( 60, 60 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 60.0
 margin/bottom = 60.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 0
-y = 0
 
-[node name="TextureFrame1" type="TextureFrame" parent="GridContainer"]
+[node name="Control1" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
+rect/min_size = Vector2( 60, 60 )
 margin/left = 64.0
 margin/top = 0.0
 margin/right = 124.0
 margin/bottom = 60.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 0
-y = 1
+x = 1
 
-[node name="TextureFrame2" type="TextureFrame" parent="GridContainer"]
+[node name="Control2" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 128.0
+rect/min_size = Vector2( 60, 60 )
 margin/top = 0.0
-margin/right = 188.0
 margin/bottom = 60.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 0
-y = 2
+x = 2
 
-[node name="TextureFrame3" type="TextureFrame" parent="GridContainer"]
+[node name="Control3" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
+rect/min_size = Vector2( 60, 60 )
 margin/left = 0.0
 margin/top = 64.0
 margin/right = 60.0
 margin/bottom = 124.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 1
-y = 0
+y = 1
 
-[node name="TextureFrame4" type="TextureFrame" parent="GridContainer"]
+[node name="Control4" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
+rect/min_size = Vector2( 60, 60 )
 margin/left = 64.0
 margin/top = 64.0
 margin/right = 124.0
 margin/bottom = 124.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
 x = 1
 y = 1
 
-[node name="TextureFrame5" type="TextureFrame" parent="GridContainer"]
+[node name="Control5" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 128.0
+rect/min_size = Vector2( 60, 60 )
 margin/top = 64.0
-margin/right = 188.0
 margin/bottom = 124.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 1
-y = 2
-
-[node name="TextureFrame6" type="TextureFrame" parent="GridContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 128.0
-margin/right = 60.0
-margin/bottom = 188.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 2
-y = 0
-
-[node name="TextureFrame7" type="TextureFrame" parent="GridContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 128.0
-margin/right = 124.0
-margin/bottom = 188.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
 x = 2
 y = 1
 
-[node name="TextureFrame8" type="TextureFrame" parent="GridContainer"]
+[node name="Control6" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 128.0
-margin/top = 128.0
-margin/right = 188.0
-margin/bottom = 188.0
-texture = ExtResource( 3 )
-stretch_mode = 0
-script/script = ExtResource( 4 )
-x = 2
+rect/min_size = Vector2( 60, 60 )
+margin/left = 0.0
+margin/right = 60.0
 y = 2
 
-[node name="Control" type="Control" parent="GridContainer"]
+[node name="Control7" parent="GridContainer" instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 192.0
-margin/right = 60.0
-margin/bottom = 192.0
+rect/min_size = Vector2( 60, 60 )
+margin/left = 64.0
+margin/right = 124.0
+x = 1
+y = 2
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="GridContainer/Control"]
+[node name="Control8" parent="GridContainer" instance=ExtResource( 3 )]
 
-frames = SubResource( 12 )
-animation = "cross_mark"
-centered = false
+rect/min_size = Vector2( 60, 60 )
+x = 2
+y = 2
 
 [node name="TitleLabel" type="Label" parent="."]
 
@@ -438,7 +329,7 @@ text = "46"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 17 )
+script/script = ExtResource( 6 )
 
 [node name="BackButtonLabel" type="Label" parent="."]
 
@@ -458,7 +349,7 @@ text = "<- Volver"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 17 )
+script/script = ExtResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -584,7 +475,17 @@ text = "Borrar"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 17 )
+script/script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 [connection signal="input_event" from="WhoPlaysControl/RestartButtonLabel" to="." method="_on_RestartButtonLabel_input_event"]
 

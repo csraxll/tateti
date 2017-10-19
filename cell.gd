@@ -1,33 +1,30 @@
-extends TextureFrame
+extends Control
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
 enum {PLAYER_1, PLAYER_2, PLAYER_NONE}
-var texture_blank= preload("res://assets/buttons/button_blank.png")
-var texture_cross= preload("res://assets/buttons/button_cross.png")
-var texture_circle= preload("res://assets/buttons/button_circle.png")
-
-var texture_cross_pre= preload("res://assets/buttons/button_cross_pre.png")
-var texture_circle_pre= preload("res://assets/buttons/button_circle_pre.png")
 
 export var x=0
 export var y=0
+
+onready var sprite = get_node("AnimatedSprite")
+
 func _ready():
-	self.set_texture(texture_blank);
+	sprite.set_animation("empty_mark")
 	
 func check(player):
 	if (player==PLAYER_1):
-		self.set_texture(texture_cross)
+		sprite.set_animation("cross_mark")
 	elif (player==PLAYER_2):
-		self.set_texture(texture_circle)
+		sprite.set_animation("circle_mark")
 	else:
-		self.set_texture(texture_blank)
+		sprite.set_animation("empty_mark")
 		
 func preCheck(player):
 	if (player==PLAYER_1):
-		self.set_texture(texture_cross_pre)
+		sprite.set_animation("empty_mark")
 	elif (player==PLAYER_2):
-		self.set_texture(texture_circle_pre)
+		sprite.set_animation("empty_mark")
 	else:
-		self.set_texture(texture_blank)
+		sprite.set_animation("empty_mark")
