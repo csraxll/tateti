@@ -18,6 +18,7 @@ var checked
 var wins_player1=0
 var wins_player2=0
 var ties_players=0
+var ia_thread = Thread.new()
 
 onready var celdas = get_node("GridContainer").get_children()
 onready var playerLabel = get_node("WhoPlaysControl/PlayerLabel")
@@ -31,21 +32,15 @@ onready var tiedGames = get_node("StatsControl/Ties")
 
 onready var player1Color = get_node("/root/global").player1Color
 onready var player2Color = get_node("/root/global").player2Color
-												
+
 func _ready():
 	for celda in celdas:
 		celda.connect("input_event", self, "_on_TextureFrame_input_event", [celda])
 		celda.connect("mouse_enter", self, "_on_TextureFrame_mouse_enter", [celda])
 		celda.connect("mouse_exit", self, "_on_TextureFrame_mouse_exit", [celda])
 	_load_stats()
-#	wins_player1=0
-#	wins_player2=0
 	_restart()
 	set_process(true)
-	#print (game_mode)
-	# Called every time the node is added to the scene.
-	# Initialization here
-	
 	
 func _process(delta):
 	if (game_state == GAME_STATE_P1):
@@ -62,14 +57,14 @@ func _process(delta):
 				else:
 					_go_to_state(GAME_STATE_P1)
 		else:
-			#get_node("Timer").start()
-			#yield(get_node("Timer"), "timeout")
-			_ia()
-			check_count += 1
-			if (_is_there_a_game(GAME_STATE_P2) or check_count >= 9):
-				_go_to_state(GAME_STATE_FINISHED)
-			else:
-				_go_to_state(GAME_STATE_P1)
+			if (not checked and not ia_thread.is_active()):
+				ia_thread.start(self, "_ia")
+			elif (checked and not ia_thread.is_active()):
+				check_count += 1
+				if (_is_there_a_game(GAME_STATE_P2) or check_count >= 9):
+					_go_to_state(GAME_STATE_FINISHED)
+				else:
+					_go_to_state(GAME_STATE_P1)
 	elif (game_state == GAME_STATE_FINISHED):
 		if (_is_there_a_game(GAME_STATE_P1)):
 			wins_player1 +=1
@@ -130,7 +125,7 @@ func _restart():
 		for y in range(3):
 			logic_cells[x][y]=PLAYER_NONE
 
-func _ia():
+func _ia(userdata):
 	var max_value= -9999
 	var x_selected=1
 	var y_selected=1
@@ -149,6 +144,8 @@ func _ia():
 	for celda in celdas:
 		if (celda.x== x_selected and celda.y== y_selected):
 			celda.check(PLAYER_2)
+	checked= true
+	ia_thread.call_deferred("wait_to_finish")
 			
 func _ia_minimize_game():
 	if (_is_there_a_game(PLAYER_2)):
