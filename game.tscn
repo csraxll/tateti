@@ -114,7 +114,6 @@ stretch_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="."]
 
-editor/display_folded = true
 anchor/left = 3
 anchor/top = 3
 anchor/right = 3

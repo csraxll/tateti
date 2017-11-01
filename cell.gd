@@ -13,7 +13,10 @@ onready var sprite = get_node("AnimatedSprite")
 func _ready():
 	#sprite.hide()
 	sprite.set_animation("empty_mark")
-	
+
+func _draw():
+	pass
+
 func check(player):
 	if (player==PLAYER_1):
 	#	sprite.show()
