@@ -124,6 +124,8 @@ func _restart():
 	for x in range(3):
 		for y in range(3):
 			logic_cells[x][y]=PLAYER_NONE
+	get_node("GuidesControl/GuidesAnimated").set_frame(0)
+	get_node("GuidesControl/GuidesAnimated").play("draw")
 
 func _ia(userdata):
 	var max_value= -9999

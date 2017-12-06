@@ -1,88 +1,131 @@
-[gd_scene load_steps=18 format=1]
+[gd_scene load_steps=53 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/main_menu/back-2-01.png" type="Texture" id=2]
-[ext_resource path="res://cell.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://button.gd" type="Script" id=6]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_00.png" type="Texture" id=3]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_01.png" type="Texture" id=4]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_02.png" type="Texture" id=5]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_03.png" type="Texture" id=6]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_04.png" type="Texture" id=7]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_05.png" type="Texture" id=8]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_06.png" type="Texture" id=9]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_07.png" type="Texture" id=10]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_08.png" type="Texture" id=11]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_09.png" type="Texture" id=12]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_10.png" type="Texture" id=13]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_11.png" type="Texture" id=14]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_12.png" type="Texture" id=15]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_13.png" type="Texture" id=16]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_14.png" type="Texture" id=17]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_15.png" type="Texture" id=18]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_16.png" type="Texture" id=19]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_17.png" type="Texture" id=20]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_18.png" type="Texture" id=21]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_19.png" type="Texture" id=22]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_20.png" type="Texture" id=23]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_21.png" type="Texture" id=24]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_22.png" type="Texture" id=25]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_23.png" type="Texture" id=26]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_24.png" type="Texture" id=27]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_25.png" type="Texture" id=28]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_26.png" type="Texture" id=29]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_27.png" type="Texture" id=30]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_28.png" type="Texture" id=31]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_29.png" type="Texture" id=32]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_30.png" type="Texture" id=33]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_31.png" type="Texture" id=34]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_32.png" type="Texture" id=35]
+[ext_resource path="res://assets/buttons/frames/guides_frames/guide_33.png" type="Texture" id=36]
+[ext_resource path="res://cell.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes.ttf" type="DynamicFontData" id=38]
+[ext_resource path="res://assets/fonts/Notepaper Airplanes Extras.ttf" type="DynamicFontData" id=39]
+[ext_resource path="res://button.gd" type="Script" id=40]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ) ],
+"loop": false,
+"name": "draw",
+"speed": 30.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
 
 font/size = 100
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 
 font/size = 73
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 
 font/size = 54
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 
 font/size = 100
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 5 )
+font/font = ExtResource( 39 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 
 font/size = 54
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=7]
-
-font/size = 50
-font/use_mipmaps = false
-font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
 [sub_resource type="DynamicFont" id=8]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
 [sub_resource type="DynamicFont" id=9]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
 [sub_resource type="DynamicFont" id=10]
 
 font/size = 50
 font/use_mipmaps = false
 font/use_filter = true
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
 [sub_resource type="DynamicFont" id=11]
 
 font/size = 50
 font/use_mipmaps = false
+font/use_filter = true
+font/font = ExtResource( 38 )
+
+[sub_resource type="DynamicFont" id=12]
+
+font/size = 50
+font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 4 )
+font/font = ExtResource( 38 )
 
 [node name="Control" type="Control"]
 
@@ -112,8 +155,27 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
 
+[node name="GuidesControl" type="Control" parent="."]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 128.0
+margin/top = 157.0
+margin/right = 389.0
+margin/bottom = 414.0
+
+[node name="GuidesAnimated" type="AnimatedSprite" parent="GuidesControl"]
+
+frames = SubResource( 1 )
+animation = "draw"
+centered = false
+
 [node name="GridContainer" type="GridContainer" parent="."]
 
+editor/display_folded = true
 anchor/left = 3
 anchor/top = 3
 anchor/right = 3
@@ -122,13 +184,15 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 91.0
-margin/top = 242.0
-margin/right = -97.0
-margin/bottom = 54.0
+margin/left = 94.0
+margin/top = 252.0
+margin/right = -106.0
+margin/bottom = 52.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
 columns = 3
 
-[node name="Control" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
 margin/left = 0.0
@@ -136,67 +200,79 @@ margin/top = 0.0
 margin/right = 60.0
 margin/bottom = 60.0
 
-[node name="Control1" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control1" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
-margin/left = 64.0
+margin/left = 70.0
 margin/top = 0.0
-margin/right = 124.0
+margin/right = 130.0
 margin/bottom = 60.0
 x = 1
 
-[node name="Control2" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control2" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
+margin/left = 140.0
 margin/top = 0.0
+margin/right = 200.0
 margin/bottom = 60.0
 x = 2
 
-[node name="Control3" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control3" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
 margin/left = 0.0
-margin/top = 64.0
+margin/top = 70.0
 margin/right = 60.0
-margin/bottom = 124.0
+margin/bottom = 130.0
 y = 1
 
-[node name="Control4" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control4" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
-margin/left = 64.0
-margin/top = 64.0
-margin/right = 124.0
-margin/bottom = 124.0
+margin/left = 70.0
+margin/top = 70.0
+margin/right = 130.0
+margin/bottom = 130.0
 x = 1
 y = 1
 
-[node name="Control5" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control5" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
-margin/top = 64.0
-margin/bottom = 124.0
+margin/left = 140.0
+margin/top = 70.0
+margin/right = 200.0
+margin/bottom = 130.0
 x = 2
 y = 1
 
-[node name="Control6" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control6" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
 margin/left = 0.0
+margin/top = 140.0
 margin/right = 60.0
+margin/bottom = 200.0
 y = 2
 
-[node name="Control7" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control7" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
-margin/left = 64.0
-margin/right = 124.0
+margin/left = 70.0
+margin/top = 140.0
+margin/right = 130.0
+margin/bottom = 200.0
 x = 1
 y = 2
 
-[node name="Control8" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="Control8" parent="GridContainer" instance=ExtResource( 37 )]
 
 rect/min_size = Vector2( 60, 60 )
+margin/left = 140.0
+margin/top = 140.0
+margin/right = 200.0
+margin/bottom = 200.0
 x = 2
 y = 2
 
@@ -212,7 +288,7 @@ margin/left = 141.0
 margin/top = 48.0
 margin/right = 137.0
 margin/bottom = 706.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.321259, 0.394064, 0.679688, 1 )
 text = "TA-TE-TI"
 align = 1
@@ -248,7 +324,7 @@ margin/left = 0.0
 margin/top = -10.0
 margin/right = 131.0
 margin/bottom = 63.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "Ganador"
 percent_visible = 1.0
@@ -266,7 +342,7 @@ margin/left = 0.0
 margin/top = -10.0
 margin/right = 131.0
 margin/bottom = 63.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "Empate"
 percent_visible = 1.0
@@ -283,7 +359,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 133.0
 margin/bottom = 54.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "Ahora juega:"
 percent_visible = 1.0
@@ -302,7 +378,7 @@ margin/left = 23.0
 margin/top = 57.0
 margin/right = -95.0
 margin/bottom = 107.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.867188, 0.14566, 0.14566, 1 )
 text = "Jugador   1"
 align = 2
@@ -323,13 +399,13 @@ margin/left = 36.0
 margin/top = 110.0
 margin/right = -33.0
 margin/bottom = 210.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "46"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 6 )
+script/script = ExtResource( 40 )
 
 [node name="BackButtonLabel" type="Label" parent="."]
 
@@ -343,13 +419,13 @@ margin/left = 142.0
 margin/top = 20.0
 margin/right = 32.0
 margin/bottom = 74.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "<- Volver"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 6 )
+script/script = ExtResource( 40 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -384,7 +460,7 @@ margin/left = 70.0
 margin/top = -120.0
 margin/right = 188.0
 margin/bottom = -66.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.867188, 0.14566, 0.14566, 1 )
 text = "Jugador 1"
 percent_visible = 1.0
@@ -401,7 +477,7 @@ margin/left = 300.0
 margin/top = -120.0
 margin/right = 418.0
 margin/bottom = -70.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.270676, 0.631152, 0.949219, 1 )
 text = "Jugador 2"
 percent_visible = 1.0
@@ -418,7 +494,7 @@ margin/left = 160.0
 margin/top = -70.0
 margin/right = 200.0
 margin/bottom = -20.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.867188, 0.14566, 0.14566, 1 )
 text = "0"
 percent_visible = 1.0
@@ -435,7 +511,7 @@ margin/left = 310.0
 margin/top = -70.0
 margin/right = 326.0
 margin/bottom = -20.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.270676, 0.631152, 0.949219, 1 )
 text = "0"
 percent_visible = 1.0
@@ -452,7 +528,7 @@ margin/left = 240.0
 margin/top = -70.0
 margin/right = 270.0
 margin/bottom = -20.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 0.621094, 0.59, 0.59198, 1 )
 text = "0"
 percent_visible = 1.0
@@ -469,13 +545,13 @@ margin/left = 208.0
 margin/top = -33.0
 margin/right = 282.0
 margin/bottom = 17.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 0.317647, 0.392157, 0.678431, 1 )
 text = "Borrar"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 6 )
+script/script = ExtResource( 40 )
 
 [connection signal="input_event" from="WhoPlaysControl/RestartButtonLabel" to="." method="_on_RestartButtonLabel_input_event"]
 
